@@ -1,7 +1,11 @@
 import time
+import sys
 
-def time_waster(s):
-    time.sleep(s)
-    print("Done waiting %ss" % s)
+seconds = int(sys.argv[1])
 
-time_waster(5)
+def time_waster():
+    time.sleep(seconds)
+    print("Done waiting %ss" % seconds)
+
+time_waster()
+sys.exit(0)
