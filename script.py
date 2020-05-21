@@ -8,4 +8,4 @@ def time_waster():
     print("Done waiting %ss" % seconds)
 
 time_waster()
-sys.exit(0)
+sys.exit(1)
