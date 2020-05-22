@@ -24,7 +24,7 @@ pipeline {
             }
         }
         stage('Deploy') {
-            agent { label 'slave' }
+            agent { label 'agent' }
             steps {
                 sh 'echo "Deployment stage"'
                 sh 'ansible --version'
