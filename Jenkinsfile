@@ -1,8 +1,8 @@
 pipeline {
-    agent any
+    agent none
     stages {
         stage('Build') {
-            agent any
+            agent { label 'master' }
             steps {
                 sh 'echo "Hello, world!"'
             }
@@ -10,25 +10,23 @@ pipeline {
         stage('Test') {
             parallel {
                 stage('Wait 5s') {
-                    agent { label 'slave1' }
+                    agent { label 'agent' }
                     steps {
-                        sh 'python --version'
                         sh 'python script.py 5'
                     }
                 }
                 stage('Wait 10s') {
-                    agent { label 'slave2' }
+                    agent { label 'master' }
                     steps {
-                        sh 'python --version'
                         sh 'python script.py 10'
                     }
                 }
             }
         }
         stage('Deploy') {
-            agent { label 'slave1' }
+            agent { label 'slave' }
             steps {
-                sh 'echo "Deployment stage!"'
+                sh 'echo "Deployment stage"'
                 sh 'ansible --version'
             }
         }
